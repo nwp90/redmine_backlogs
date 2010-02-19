@@ -8,11 +8,12 @@ class BacklogsController < ApplicationController
   protect_from_forgery :only => []
 
   def index
-    @items         = Item.find_by_project(@project)
+    @items         = Item.find_by_project_except_tracker(@project, cookies[:subtask_tracker])
     @item_template = Item.new
     @backlogs      = Backlog.find_by_project(@project)
     @hide_closed_backlogs = (cookies[:hide_closed_backlogs] == "true")
     @hide_tasks = (cookies[:hide_tasks] == "true")
+    render :view => "index", :layout => "backlogs_plugin"
   end
 
   def show

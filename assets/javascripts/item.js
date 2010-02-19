@@ -361,10 +361,10 @@ RBL.Item = Class.create(RBL.Model, {
     }
     
     params["item[backlog_id]"] = this.getBacklogID();
-    params["item[parent_id]"]  = this.getParentID();
+    params["relation[parent_id]"] = this.getParentID();
     params["prev"]             = this.getPrevious()==null ? null : this.getPrevious().getValue('.id');
     params["next"]             = this.getNext()==null ? null : this.getNext().getValue('.id');
-    
+
     return params;
   },
   

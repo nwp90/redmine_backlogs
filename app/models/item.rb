@@ -12,6 +12,7 @@ class Item < ActiveRecord::Base
   end
 
   def self.create(params, project)
+    parent= params[:item].delete(:parent_id)
     issue = create_issue(params, project)
     item  = find_by_issue_id(issue.id)
     item.update_attributes! params[:item]
@@ -94,7 +95,11 @@ class Item < ActiveRecord::Base
   end
 
   def self.find_by_project(project)
-    find(:all, :include => :issue, :conditions => "issues.project_id=#{project.id} and items.parent_id=0", :order => "items.position ASC")
+    find_by_project_except_tracker(project, nil)
+  end
+
+  def self.find_by_project_except_tracker(project, tracker)
+    find(:all, :include => :issue, :conditions => ["issues.project_id=#{project.id} and issues.tracker_id!=?", tracker], :order => "items.position ASC")
   end
 
   def self.remove_with_issue(issue)

@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
   end
   
   def create
-    item = Item.create(params, @project)
+    item = Item.create(params, @project, cookies)
     render :partial => "item", :locals => { :item => item }
   end
 
