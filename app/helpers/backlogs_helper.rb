@@ -2,7 +2,7 @@ module BacklogsHelper
 
   def backlog_date(backlog, field_name)
     d = backlog.send(field_name)
-    d.nil? ? "(not set)" : d.strftime("%Y-%m-%d")
+    d.nil? ? "<em>no due date</em>" : d.strftime("%Y %b %d")
   end
   
   def mark_closed_if_so(item_or_task)

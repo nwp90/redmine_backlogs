@@ -3,8 +3,8 @@
   <%= yield :breadcrumbs -%>
   </div>
   <div class="links">
-    <a href="../">Back to Redmine</a>
-    <a href="#">Hide closed backlogs</a>
+    <%= yield :page_specific_links -%>
     <a href="#">Settings</a>
+    <a href="../">Back to Redmine</a>
   </div>
 </div>
