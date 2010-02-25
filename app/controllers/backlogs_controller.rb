@@ -17,7 +17,8 @@ class BacklogsController < ApplicationController
   end
 
   def show
-    render :json => @backlog.to_json(:methods => [:description, :end_date, :eta, :name]) 
+    # render :json => @backlog.to_json(:methods => [:description, :end_date, :eta, :name]) 
+    render :view => "show", :layout => "backlogs_plugin"
   end
   
   def update

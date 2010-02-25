@@ -4,7 +4,7 @@
 <% end %>
 
 <% content_for :breadcrumbs do %>
-Totally Awesome Project
+<%= @project.name %>
 <% end %>
 
 <% content_for :page_specific_links do %>
@@ -16,7 +16,7 @@ Totally Awesome Project
     <%- unless @hide_closed_backlogs && backlog.is_closed? %>
     <div class="backlog <%= backlog.is_closed? ? "closed" : "" %>">
       <div class="header">
-        <span class="name"><%= backlog.version.name %></span>
+        <span class="name"><%= link_to backlog.version.name, backlog_path(backlog.id) %></span>
         <span class="due_date"><%= backlog_date(backlog.version, "effective_date") %></span>
       </div>
       <ul><%= render :partial => "items/item", :collection => @items.select{|item| item.backlog_id==backlog.id} %></ul>
@@ -26,4 +26,20 @@ Totally Awesome Project
 </div>
 
 <div id="main_backlog">
+  <div class="backlog main">
+    <div class="header">
+      <span class="name">Main Backlog</span>
+    </div>
+    <ul><%= render :partial => "items/item", :collection => @items.select{|item| item.backlog_id==0} %></ul>
+  </div>
+</div>
+
+<div id="dialogs">
+  <div class="move">
+    Move selected items to
+    <select>
+      <option>Main Backlog</option>
+      <option>The quick brown fox jumps over the lazy dog.</option>
+    </select>
+  </div>
 </div>

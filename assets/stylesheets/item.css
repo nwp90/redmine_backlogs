@@ -29,7 +29,7 @@
   display:block;
   font-size:9px;
   height:12px;
-  left:25px;
+  left:27px;
   overflow:hidden;
   padding:0px 3px 0px 1px;
   position:absolute;
@@ -73,7 +73,7 @@
 .item  > .body div.status_id {
   display:block;
   height:15px;
-  left:510px;
+  left:540px;
   overflow:hidden;
   padding:2px 2px 2px 9px;
   position:absolute;

@@ -1,0 +1,54 @@
+/* BACKLOG TABLE STYLES */
+#backlog table{
+  background-color:rgb(254,250,248);
+  border:1px solid #CCCCCC;
+  margin-bottom:10px;
+  margin-right:10px;
+}
+#backlog td{
+  border-right:1px dotted #CFCFCF;
+  border-bottom:1px solid #CFCFCF;
+  padding:10px 0 0 20px;
+  min-width:295px;
+  vertical-align:top;
+  width:295px;
+}
+#backlog tr:first-child td{
+  border-bottom:none;
+  font-size:14px;
+  font-weight:bold;
+  padding:10px;
+  padding-bottom:0;
+  text-align:center;
+}
+#backlog tr:last-child td{
+  border-bottom:none;
+}
+#backlog td:last-child{
+  border-right:none;
+}
+#backlog td:first-child{
+  min-width:200px;
+  padding:10px;
+  width:200px;
+}
+#backlog ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+/* BACKLOG TASK STYLES */
+#backlog .task{
+  background-color:rgb(255,253,200);
+  border:1px solid #CCCCCC;
+  cursor:move;
+  display:block;
+  float:left;
+  font-size:10px;
+  height:70px;
+  margin:0 10px 10px 0;
+  width:130px;
+}
+#backlog .task.blank{
+  cursor:pointer;
+}

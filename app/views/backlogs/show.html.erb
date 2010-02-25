@@ -1,4 +1,40 @@
-<h2><%= @backlog.version.name %> (<%= @backlog.version.effective_date %>)</h2>
-<table class="backlog">
-  <%= render :partial => "items", :collection => @items, :as => :item %>
-</table>
+<% content_for :header_tags do %>
+<%= stylesheet_link_tag 'common', 'show', :plugin => 'redmine_backlogs', :media => 'screen, print' %>
+<% end %>
+
+<% content_for :breadcrumbs do %>
+<%= link_to @project.name, :controller => "backlogs", :action => "index", :project_id => @project %> : <%= @backlog.version.name %>
+<% end %>
+
+<div id="backlog">
+  <table cellspacing="0">
+    <tr>
+      <td class="story">Story</td>
+      <td>New</td>
+      <td>In Progress</td>
+      <td>Done</td>
+    </tr>
+    <%- 4.times do |i| %>
+    <tr>
+      <td class="story">01012 The quick brown fox jumps over the lazy dog</td>
+      <%- 3.times do |j| %>
+      <td>
+        <ul id="list_<%= "#{i}#{j}" %>">
+          <%- 3.times do |k| %>
+          <li class="task instance"><%= "#{i}#{j}#{k}" %> The quick brown fox jumps over the lazy dog</li>
+          <%- end %>
+          <li class="task blank">Click to create</li>
+        </ul>
+      </td>
+      <%- end %>
+    </tr>
+    <%- end %>
+  </table>
+</div>
+
+<script>
+  var lists = $$("ul");
+  lists.each(function(list){
+    Sortable.create(list, { containment:lists, constraint:false, only:"instance" })
+  })
+</script>
