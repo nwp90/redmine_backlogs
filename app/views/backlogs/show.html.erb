@@ -6,35 +6,32 @@
 <%= link_to @project.name, :controller => "backlogs", :action => "index", :project_id => @project %> : <%= @backlog.version.name %>
 <% end %>
 
-<div id="backlog">
-  <table cellspacing="0">
-    <tr>
-      <td class="story">Story</td>
-      <td>New</td>
-      <td>In Progress</td>
-      <td>Done</td>
-    </tr>
-    <%- 4.times do |i| %>
-    <tr>
-      <td class="story">01012 The quick brown fox jumps over the lazy dog</td>
-      <%- 3.times do |j| %>
-      <td>
-        <ul id="list_<%= "#{i}#{j}" %>">
-          <%- 3.times do |k| %>
-          <li class="task instance"><%= "#{i}#{j}#{k}" %> The quick brown fox jumps over the lazy dog</li>
-          <%- end %>
-          <li class="task blank">Click to create</li>
-        </ul>
-      </td>
+<table id="sprint" cellspacing="0">
+  <tr>
+    <td class="story">Story</td>
+    <td>New</td>
+    <td>In Progress</td>
+    <td>Review</td>
+    <td>Done</td>
+  </tr>
+  <%- 4.times do |i| %>
+  <tr>
+    <td class="story">01012 The quick brown fox jumps over the lazy dog</td>
+    <%- 4.times do |j| %>
+    <td class="list" id="list_<%= "#{i}#{j}" %>">
+      <%- 4.times do |k| %>
+      <div class="task instance" id="task_<%= "#{i}#{j}#{k}" %>"><%= "#{i}#{j}#{k}" %> The quick brown fox jumps over the lazy dog</div>
       <%- end %>
-    </tr>
+      &nbsp;
+    </td>
     <%- end %>
-  </table>
-</div>
+  </tr>
+  <%- end %>
+</table>
 
 <script>
-  var lists = $$("ul");
+  var lists = $$("td.list");
   lists.each(function(list){
-    Sortable.create(list, { containment:lists, constraint:false, only:"instance" })
+    Sortable.create(list, { containment:lists, constraint:false, only:"instance", scroll:window, treeTag:'td', tag:'div', dropOnEmpty:true, hoverclass:'hover' })
   })
 </script>

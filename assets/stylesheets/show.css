@@ -1,54 +1,58 @@
-/* BACKLOG TABLE STYLES */
-#backlog table{
+/* SPRINT TABLE STYLES */
+#sprint{
   background-color:rgb(254,250,248);
   border:1px solid #CCCCCC;
   margin-bottom:10px;
   margin-right:10px;
 }
-#backlog td{
+#sprint td{
   border-right:1px dotted #CFCFCF;
   border-bottom:1px solid #CFCFCF;
-  padding:10px 0 0 20px;
-  min-width:295px;
+  padding:0 5px 10px 0;
+  min-width:250px;
   vertical-align:top;
-  width:295px;
+  width:250px;
 }
-#backlog tr:first-child td{
+#sprint tr:first-child td{
+  background-color:rgb(235,235,235);
   border-bottom:none;
+  color:rgb(126,126,126);
   font-size:14px;
   font-weight:bold;
-  padding:10px;
+  height:30px;
+  padding:0;
   padding-bottom:0;
   text-align:center;
+  vertical-align:middle;
 }
-#backlog tr:last-child td{
+#sprint tr:last-child td{
   border-bottom:none;
 }
-#backlog td:last-child{
+#sprint td:last-child{
   border-right:none;
 }
-#backlog td:first-child{
-  min-width:200px;
+#sprint td:first-child{
+  min-width:137px;
   padding:10px;
-  width:200px;
+  width:137px;
 }
-#backlog ul{
-  list-style:none;
-  margin:0;
-  padding:0;
+#sprint td.list.hover{
+  background-color:#CCCCCC;
 }
 /* BACKLOG TASK STYLES */
-#backlog .task{
+#sprint .task{
   background-color:rgb(255,253,200);
   border:1px solid #CCCCCC;
   cursor:move;
   display:block;
   float:left;
   font-size:10px;
-  height:70px;
-  margin:0 10px 10px 0;
-  width:130px;
+  height:60px;
+  margin:10px 0 0 10px;
+  padding:5px;
+  position:relative;
+  width:100px;
 }
-#backlog .task.blank{
+#sprint .task.blank{
   cursor:pointer;
 }
