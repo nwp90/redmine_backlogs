@@ -29,9 +29,9 @@
   <%- end %>
 </table>
 
-<script>
-  var lists = $$("td.list");
-  lists.each(function(list){
-    Sortable.create(list, { containment:lists, constraint:false, only:"instance", scroll:window, treeTag:'td', tag:'div', dropOnEmpty:true, hoverclass:'hover' })
-  })
-</script>
+<script type="text/javascript">
+	$(function() {
+		$(".list").sortable({ connectWith: '.list' });
+		$(".list").disableSelection();
+	});
+	</script>
