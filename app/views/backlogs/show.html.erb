@@ -1,5 +1,11 @@
 <% content_for :header_tags do %>
+<%= javascript_include_tag  'task', :plugin => 'redmine_backlogs', :cache => 'backlogsjs/all' %>
 <%= stylesheet_link_tag 'common', 'show', :plugin => 'redmine_backlogs', :media => 'screen, print' %>
+<script type="text/javascript">
+	$(function() {
+		initialize();
+	});
+</script>
 <% end %>
 
 <% content_for :breadcrumbs do %>
@@ -28,10 +34,3 @@
   </tr>
   <%- end %>
 </table>
-
-<script>
-  var lists = $$("td.list");
-  lists.each(function(list){
-    Sortable.create(list, { containment:lists, constraint:false, only:"instance", scroll:window, treeTag:'td', tag:'div', dropOnEmpty:true })
-  })
-</script>

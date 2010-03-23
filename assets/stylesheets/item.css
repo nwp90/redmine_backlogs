@@ -8,6 +8,9 @@
   position:relative;
   width:100%;
 }
+.placeholder{
+  background-color:#ECECEC;
+}
 .item:hover{
   background-color:rgb(254,248,168);
 }

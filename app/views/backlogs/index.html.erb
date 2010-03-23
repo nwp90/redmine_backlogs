@@ -1,6 +1,6 @@
 <% content_for :header_tags do %>
-<%= stylesheet_link_tag 'common', 'index', 'item', :plugin => 'redmine_backlogs', :media => 'screen, print' %>
 <%= javascript_include_tag  'main', 'backlog', 'item', :plugin => 'redmine_backlogs', :cache => 'backlogsjs/all' %>
+<%= stylesheet_link_tag 'common', 'index', 'item', :plugin => 'redmine_backlogs', :media => 'screen, print' %>
 <% end %>
 
 <% content_for :breadcrumbs do %>
@@ -19,7 +19,9 @@
         <span class="name"><%= link_to backlog.version.name, backlog_path(backlog.id) %></span>
         <span class="due_date"><%= backlog_date(backlog.version, "effective_date") %></span>
       </div>
-      <ul><%= render :partial => "items/item", :collection => @items.select{|item| item.backlog_id==backlog.id} %></ul>
+      <ul class="list">
+        <%= render :partial => "items/item", :collection => @items.select{|item| item.backlog_id==backlog.id} %>
+      </ul>
     </div>
     <%- end %>
   <%- end %>
@@ -30,7 +32,9 @@
     <div class="header">
       <span class="name">Main Backlog</span>
     </div>
-    <ul><%= render :partial => "items/item", :collection => @items.select{|item| item.backlog_id==0} %></ul>
+    <ul class="list">
+      <%= render :partial => "items/item", :collection => @items.select{|item| item.backlog_id==0} %>
+    </ul>
   </div>
 </div>
 
@@ -43,3 +47,9 @@
     </select>
   </div>
 </div>
+
+<select class="status_id" id="status_id_options">
+  <%- IssueStatus.find(:all, :order => "position ASC").each do |status| %>
+  <option value="<%= status.id %>" class="<%= (status.is_closed? ? "closed" : "") %>"><%= status.name %></option>
+  <%- end %>
+</select>
