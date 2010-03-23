@@ -1,5 +1,11 @@
 <% content_for :header_tags do %>
+<%= javascript_include_tag  'task', :plugin => 'redmine_backlogs', :cache => 'backlogsjs/all' %>
 <%= stylesheet_link_tag 'common', 'show', :plugin => 'redmine_backlogs', :media => 'screen, print' %>
+<script type="text/javascript">
+	$(function() {
+		initialize();
+	});
+</script>
 <% end %>
 
 <% content_for :breadcrumbs do %>
@@ -28,10 +34,3 @@
   </tr>
   <%- end %>
 </table>
-
-<script type="text/javascript">
-	$(function() {
-		$(".list").sortable({ connectWith: '.list' });
-		$(".list").disableSelection();
-	});
-	</script>

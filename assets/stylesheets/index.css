@@ -29,6 +29,9 @@
   margin:0;
   padding:0 0 4px 0;
 }
+#status_id_options{
+  display:none;
+}
 /*MAIN BACKLOG SPECIFIC*/
 #main_backlog{
   float:right;
