@@ -3,25 +3,36 @@ class Story < Issue
 
     acts_as_list :scope => 'coalesce(cast(issues.fixed_version_id as char), \'\') = \'#{fixed_version_id}\' AND issues.parent_id is NULL'
 
-    named_scope :product_backlog, lambda { |project|
-        {
-            :order => 'position ASC',
-            :conditions => [
-                "parent_id is NULL and project_id = ? and tracker_id in (?) and fixed_version_id is NULL and status_id in (?)",
-                project.id, Story.trackers, IssueStatus.find(:all, :conditions => ["is_closed = ?", false]).collect {|s| "#{s.id}" }
-                ]
-        }
-    }
+    def self.product_backlog(project)
+        return Story.find(:all,
+                        :conditions => [
+                            "parent_id is NULL
+                            and tracker_id in (?)
+                            and fixed_version_id is NULL
+                            and (#{project.project_condition(true)})
+                            and status_id in (?)",
+                            Story.trackers,
+                            IssueStatus.find(:all, :conditions => ["is_closed = ?", false]).collect {|s| "#{s.id}" }
+                        ],
+                        :order => 'position ASC',
+                        :include => :project
+                        )
+    end
 
-    named_scope :sprint_backlog, lambda { |sprint|
-        {
-            :order => 'position ASC',
-            :conditions => [
-                "parent_id is NULL and tracker_id in (?) and fixed_version_id = ?",
-                Story.trackers, sprint.id
-                ]
-        }
-    }
+    def self.sprint_backlog(sprint, project)
+        return Story.find(:all,
+                        :conditions => [
+                            "parent_id is NULL
+                            and tracker_id in (?)
+                            and fixed_version_id = ?
+                            and (#{project.project_condition(true)})",
+                            Story.trackers,
+                            sprint.id
+                        ],
+                        :order => 'position ASC',
+                        :include => :project
+                        )
+    end
 
     def self.trackers
         trackers = Setting.plugin_redmine_backlogs[:story_trackers]

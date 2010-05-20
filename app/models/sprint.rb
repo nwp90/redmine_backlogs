@@ -3,15 +3,12 @@ require 'date'
 class Sprint < Version
     unloadable
 
-    named_scope :open_sprints, lambda { |project|
-        {
-            :order => 'sprint_start_date ASC, effective_date ASC',
-            :conditions => [ "status = 'open' and project_id = ?", project.id ]
-        }
-    }
+    def self.open_sprints(project)
+        return project.shared_versions.select {|sprint| sprint.status == 'open' }
+    end
 
-    def stories
-        return Story.sprint_backlog(self)
+    def stories(project)
+        return Story.sprint_backlog(self, project)
     end
 
     def points
