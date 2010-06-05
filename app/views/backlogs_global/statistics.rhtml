@@ -12,7 +12,8 @@
 </script>
 
 <div id="projects">
-    <% @projects.each do |project| %>
+    <%  charts = []
+        @projects.each do |project| %>
         <% stats = project.scrum_statistics %>
         <h3><a href="#"><span class="score score_<%= stats[:score][:score] %>"><%= stats[:score][:score] %></span> <%= project.name %></a> </h3>
         <div>
@@ -39,6 +40,19 @@
                     <li><%= e %></li>
                 </ul>
             <% end %>
+
+            <%  active = project.active_sprint
+                if active && active.has_burndown
+                    div = "burndown_#{active.id}"
+                    charts << {:div => div, :burndown => active.burndown }
+            %>
+                    <div id="<%= div %>" style="margin-top:20px; margin-left:20px; width:640px; height:480px;"></div>
+            <% end %>
+
+
         </div>
+    <% end %>
+    <% if charts.size > 0 %>
+        <%= render :partial => 'backlogs/burndown', :locals => {:charts => charts } %>
     <% end %>
 </div>
