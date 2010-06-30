@@ -101,7 +101,7 @@ RBL.storePreferences = function(){
 
 RBL.urlFor = function(options){
   // THINKABOUTTHIS: Is it worth using Rails' routes for this instead?
-  var url = '/' + options['controller'] 
+  var url = '/redmine' + options['controller'] 
   if(options['action']!=null && options['action'].match(/index/)==null) url += '/' + options['action'];
   if(options['id']!=null) url += "/" + options['id'];
   
