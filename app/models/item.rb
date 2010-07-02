@@ -102,7 +102,10 @@ class Item < ActiveRecord::Base
   end
 
   def update_issue_points
-    Item.custom_points(issue).update_attribute(:value, points) if Item.custom_points(issue)
+    issue = Issue.find_by_id(self.issue_id)
+    if !issue.nil?
+      Item.custom_points(issue).update_attribute(:value, points) if Item.custom_points(issue)
+    end
   end
 
   def self.update_from_issue(issue)
